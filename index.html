@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rallyify - The Ultimate Event Planning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4761ff;
+            --secondary: #7c3aed;
+            --accent: #f97316;
+            --text: #1f2937;
+            --bg-light: #ffffff;
+            --bg-off: #f9fafb;
+            --gray: #6b7280;
+            --success: #22c55e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .header-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--bg-off);
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-heading h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-heading h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-heading p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.75rem;
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .feature p {
+            color: var(--gray);
+        }
+        
+        /* How It Works Section */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        
+        .step-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        /* App Screens Section */
+        .app-screens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .screen {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .screen:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .screen-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .screen-content {
+            padding: 1.5rem;
+        }
+        
+        .screen h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        
+        .screen ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .screen li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .screen li:before {
+            content: "→";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Exit Potential Section */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .metric {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* User Experience Section */
+        .flow-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .flow-step {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .flow-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .flow-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Tech Stack Section */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .tech {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .tech h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        
+        .tech p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Marketing Section */
+        .marketing-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .marketing-point {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .marketing-icon {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .marketing-point h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-off);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        footer p {
+            color: var(--gray);
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .feature, .step, .screen, .metric, .marketing-point {
+                padding: 1.5rem;
+            }
+            
+            .features, .app-screens, .metrics, .marketing-points {
+                gap: 1.5rem;
+            }
+            
+            .section-heading h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Rallyify</h1>
+                <p>The Ultimate AI-Powered Event Planning Platform That Plans Your Events In Minutes</p>
+                <div class="header-buttons">
+                    <a href="#features" class="btn btn-primary">Explore Features</a>
+                    <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Intro Section -->
+    <section id="intro">
+        <div class="container">
+            <div class="section-heading">
+                <h2>The Big Idea</h2>
+                <p>Transforming how non-planners organize their events</p>
+            </div>
+            
+            <div class="card">
+                <p>Rallyify is an <strong>AI-powered, all-in-one event planning platform</strong> designed for non-planners - parents, teens, executives, and anyone who hates the stress of planning events. It solves universal pain points like decision overload, group chaos, budget blowouts, and time suck, making planning fast, fun, and viral.</p>
+                <p>The platform transforms the planning process by allowing users to answer just 5 simple questions or use voice commands, then AI does the rest - suggesting venues, catering, decor, and managing the guest list - all while keeping everything on budget.</p>
+                <p>Whether it's birthdays, weddings, corporate retreats, or game nights, Rallyify handles everything from ideation to execution, so users can focus on enjoying their events, not stressing about planning them.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Core Features</h2>
+                <p>Powerful tools that make event planning effortless</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Planning</h3>
+                    <p>Answer 5 questions (event type, guests, budget), and AI generates a complete plan with venue, catering, and decor suggestions.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3>Voice Activation</h3>
+                    <p>Simply say "Hey Rallyify, find me a venue for 50 people under $1,000" and it's done in seconds.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Group Coordination</h3>
+                    <p>Invite co-planners and let AI moderate group decisions (e.g., "75% voted for tacos—locked in!").</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Budget Autopilot</h3>
+                    <p>Track spending in real-time, flag overages, and receive AI suggestions for cost-saving alternatives.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Instant RSVPs</h3>
+                    <p>Send beautiful, customizable invitations and track responses, dietary restrictions, and plus-ones automatically.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Vendor Marketplace</h3>
+                    <p>AI matches vendors to your budget and preferences, with transparent pricing and 10-20% commission on bookings.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Gamification</h3>
+                    <p>Earn badges for planning milestones and compete on leaderboards to make planning fun and engaging.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Post-Event Scrapbooks</h3>
+                    <p>AI generates digital scrapbooks with photos, videos, and guest messages that are shareable on social media.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-heading">
+                <h2>How It Works</h2>
+                <p>Planning an event has never been this simple</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Answer 5 Simple Questions</h3>
+                        <p>Tell Rallyify about your event type, guest count, budget, location, and preferred theme or vibe. You can type, tap, or use voice commands to provide this information in seconds.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI Generates Your Plan</h3>
+                        <p>Rallyify's AI instantly creates a complete event plan with venue suggestions, catering options, decoration ideas, and a timeline—all within your budget.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Customize with Voice</h3>
+                        <p>Want changes? Just say "Hey Rallyify, find a cheaper venue" or "Hey Rallyify, add a DJ"—the AI adjusts your plan instantly while keeping within budget.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Rally Your Crew</h3>
+                        <p>Invite co-planners to collaborate and vote on options. Send beautiful invitations and track RSVPs, all from within the app.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Execute & Share</h3>
+                        <p>Lock in your plan, book vendors, and execute your event. After it's over, share your AI-generated scrapbook on social media to show off your success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- App Screens Section -->
+    <section id="app-screens">
+        <div class="container">
+            <div class="section-heading">
+                <h2>App Experience</h2>
+                <p>A seamless, user-friendly interface designed for non-planners</p>
+            </div>
+            
+            <div class="app-screens">
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>Welcome Screen</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>Bold welcome: "Rallyify – Rally Your Events!"</li>
+                            <li>"Get Started" and "Log In" buttons</li>
+                            <li>Voice prompt: "Say 'Hey Rallyify' to start planning!"</li>
+                            <li>Colorful, celebration-themed background</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>Dashboard</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>Personal greeting: "Hey [Name]! Ready to Rally?"</li>
+                            <li>Current events with progress bars</li>
+                            <li>"New Event" and "Voice Plan" buttons</li>
+                            <li>Access to past events and scrapbooks</li>
+                            <li>Navigation to Events, Vendors, Profile</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>AI Planning</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>5 questions with simple inputs: event type, guests, budget, location, theme</li>
+                            <li>Voice input option for each question</li>
+                            <li>Progress indicator (e.g., 3/5 questions)</li>
+                            <li>Smart suggestions based on previous answers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>Event Details</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>Complete AI-generated plan with venue, catering, decor</li>
+                            <li>Budget tracker with color indicators</li>
+                            <li>Group voting status and co-planner section</li>
+                            <li>RSVP tracking counter</li>
+                            <li>"Lock In" and "Voice Tweak" buttons</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>Vendor Marketplace</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>AI-matched vendors with photos and ratings</li>
+                            <li>Price, capacity, and availability details</li>
+                            <li>Filters for budget, distance, and ratings</li>
+                            <li>"Book Now" buttons with secure processing</li>
+                            <li>Voice search option for refinements</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>RSVP Management</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>Beautiful invitation templates</li>
+                            <li>Guest list management with status indicators</li>
+                            <li>Dietary restriction tracking</li>
+                            <li>Automated reminders for non-responders</li>
+                            <li>Co-planner voting interface</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>Scrapbook</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>AI-generated event memories</li>
+                            <li>Photo and video gallery</li>
+                            <li>Guest messages and highlights</li>
+                            <li>One-tap sharing to social media</li>
+                            <li>Option to add more content post-event</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="screen">
+                    <div class="screen-header">
+                        <h3>Profile & Gamification</h3>
+                    </div>
+                    <div class="screen-content">
+                        <ul>
+                            <li>Earned badges display (e.g., "Venue Master")</li>
+                            <li>Planning leaderboard position</li>
+                            <li>Premium subscription toggle ($10/month)</li>
+                            <li>Profile and payment settings</li>
+                            <li>Event planning history and stats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- User Experience Section -->
+    <section id="user-experience">
+        <div class="container">
+            <div class="section-heading">
+                <h2>User Flow Example</h2>
+                <p>Follow Chad as he plans his 30th birthday party</p>
+            </div>
+            
+            <div class="flow-container">
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-icon">1</div>
+                        <div class="flow-content">
+                            <h4>Quick Setup</h4>
+                            <p>Chad opens Rallyify and taps "New Event." He answers 5 questions: "Birthday," "20 guests," "$1,000 budget," "Near me," and "Casual vibe." The AI generates an initial plan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">2</div>
+                        <div class="flow-content">
+                            <h4>Budget Tweaking</h4>
+                            <p>The AI suggests a "Rooftop Bar" ($800) and "Taco Truck" ($400), but that's over budget. Chad says, "Hey Rallyify, find a cheaper venue," and it suggests "Community Hall" ($450), bringing him under budget.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">3</div>
+                        <div class="flow-content">
+                            <h4>Group Coordination</h4>
+                            <p>Chad invites Sarah and Mike as co-planners. They vote on food options, and tacos win with 75% approval. Chad sends RSVPs, and 15 of 20 people confirm attendance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">4</div>
+                        <div class="flow-content">
+                            <h4>Finalizing Details</h4>
+                            <p>Chad locks in the plan, earning the "Venue Master" badge. He books the venue and catering through Rallyify's vendor marketplace, securing everything with just a few taps.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">5</div>
+                        <div class="flow-content">
+                            <h4>Sharing Success</h4>
+                            <p>After the party, Rallyify creates a digital scrapbook with photos and guest messages. Chad shares it on Instagram: "Chad's 30th—planned with Rallyify in just 10 minutes!" His friends are impressed and download the app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Marketing Section -->
+    <section id="marketing">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Why It Markets Itself</h2>
+                <p>Built-in viral loops and satisfaction that drives word-of-mouth</p>
+            </div>
+            
+            <div class="marketing-points">
+                <div class="marketing-point">
+                    <div class="marketing-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Relatable Pain Point</h3>
+                    <p>Everyone plans 5-10 events annually and hates the stress. Rallyify's simplicity drives enthusiastic recommendations: "Rallyify planned my wedding in just 10 minutes!"</p>
+                </div>
+                
+                <div class="marketing-point">
+                    <div class="marketing-icon">
+                        <i class="fas fa-retweet"></i>
+                    </div>
+                    <h3>Viral Loops</h3>
+                    <p>Group invites, RSVPs, and post-event scrapbooks naturally spread the word. When a user invites 10 co-planners or guests, they all see Rallyify in action and want it for their own events.</p>
+                </div>
+                
+                <div class="marketing-point">
+                    <div class="marketing-icon">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
+                    <h3>Low Friction</h3>
+                    <p>5 questions or voice commands = full plan. Non-planners love the simplicity, and the "wow" factor of voice planning makes it instantly sharable.</p>
+                </div>
+                
+                <div class="marketing-point">
+                    <div class="marketing-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>Social Proof</h3>
+                    <p>Scrapbooks and gamification features are designed for sharing on TikTok, Instagram, and other platforms, driving organic growth through social validation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Exit Potential Section -->
+    <section id="exit-potential">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Exit Potential: $5M+</h2>
+                <p>Clear path to growth and acquisition</p>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">50K+</div>
+                    <div class="metric-label">Free Users (Year 1 Target)</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">10K</div>
+                    <div class="metric-label">Premium Users ($10/month)</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">$1.2M</div>
+                    <div class="metric-label">Annual Recurring Revenue</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">$500K</div>
+                    <div class="metric-label">Vendor Commissions (10-20%)</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">$1.7M</div>
+                    <div class="metric-label">Total Year 1 Revenue</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">5x</div>
+                    <div class="metric-label">Potential Exit Multiple</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">60%+</div>
+                    <div class="metric-label">Profit Margin</div>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">$8.5M</div>
+                    <div class="metric-label">Potential Exit Valuation</div>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 3rem;">
+                <h3>Potential Buyers</h3>
+                <ul>
+                    <li>Big tech companies (Google, Meta) looking to expand into event planning</li>
+                    <li>Event platforms (Eventbrite, Zola) wanting to acquire an all-in-one solution</li>
+                    <li>Travel and hospitality companies (Airbnb, Expedia) aiming to add event planning features</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tech Stack Section -->
+    <section id="tech-stack">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Tech Stack</h2>
+                <p>Built with cutting-edge technology</p>
+            </div>
+            
+            <div class="tech-stack">
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h4>Frontend</h4>
+                    <p>React Native (mobile)<br>React (web)</p>
+                </div>
+                
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h4>Backend</h4>
+                    <p>Node.js (Express)<br>FastAPI (Python)</p>
+                </div>
+                
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>AI</h4>
+                    <p>Google Cloud AI<br>Speech-to-text<br>NLP & ML</p>
+                </div>
+                
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Database</h4>
+                    <p>PostgreSQL<br>Redis (caching)</p>
+                </div>
+                
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h4>Design</h4>
+                    <p>Figma<br>Custom UI Kit</p>
+                </div>
+                
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h4>Voice</h4>
+                    <p>Speech Recognition<br>Custom NLP</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pain Points Section -->
+    <section id="pain-points">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Pain Points Solved</h2>
+                <p>Addressing the biggest challenges in event planning</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Decision Overload</h3>
+                    <p>Too many choices (venues, caterers, themes) paralyze users. Rallyify's AI narrows options to the perfect matches based on your criteria.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-random"></i>
+                    </div>
+                    <h3>Group Coordination Chaos</h3>
+                    <p>Group chats turn into endless debates. Rallyify's AI moderates decisions and streamlines the process with voting and lock-ins.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Budget Blowouts</h3>
+                    <p>Costs spiral out of control. Rallyify's budget autopilot tracks spending in real-time and suggests alternatives to keep you on budget.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <h3>Time Suck</h3>
+                    <p>Planning takes 20-50+ hours. Rallyify's AI and voice commands cut this down to minutes, giving busy people their time back.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <h3>Social Pressure</h3>
+                    <p>Events need to be "Instagram-worthy." Rallyify suggests trendy themes and creates shareable scrapbooks that boost social proof.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Fragmented Tools</h3>
+                    <p>Existing tools (Eventbrite, Canva, Google Sheets) are disconnected. Rallyify is an all-in-one platform for every aspect of planning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Implementation Plan -->
+    <section id="implementation">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Implementation Roadmap</h2>
+                <p>From concept to $5M+ exit</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Validate (1 Week)</h3>
+                        <p>Interview 10 non-planners about their pain points. Build a landing page with a waitlist. Test initial messaging with small ad campaigns.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Build MVP (2-3 Months)</h3>
+                        <p>Focus on core features: AI planner, event details, RSVPs. Use React Native for the app, Node.js for the backend. Test with 50 beta users.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Launch (1 Month)</h3>
+                        <p>Product Hunt launch with viral video ("Planned my wedding in 10 minutes!"). TikTok/Instagram content campaign. Partner with influencers in the event space.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Scale (6-12 Months)</h3>
+                        <p>Drive free users through viral loops. Convert 20% to premium with vendor bookings and AI features. Aim for 10,000 premium users + $500K commissions.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Exit (Year 2)</h3>
+                        <p>Document financials and user growth. Reach out to brokers or potential buyers. Negotiate a 5x multiple for $5M+ exit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Rally Your Events?</h2>
+            <p>Join our waitlist to be the first to experience Rallyify when we launch.</p>
+            <a href="#" class="btn btn-secondary">Join Waitlist</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rallyify - The Ultimate Event Planning Platform</p>
+            <p>Built by a <span class="highlight">Gigachad</span> for <span class="highlight">Gigachads</span></p>
+        </div>
+    </footer>
+</body>
+</html>
